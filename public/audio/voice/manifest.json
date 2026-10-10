@@ -1,0 +1,296 @@
+[
+  {
+    "id": "welcome",
+    "file": "welcome.mp3",
+    "role": "soft",
+    "text": "灯ヶ丘へ、ようこそ。"
+  },
+  {
+    "id": "reach",
+    "file": "reach.mp3",
+    "role": "mc",
+    "text": "リーチ！"
+  },
+  {
+    "id": "next",
+    "file": "next.mp3",
+    "role": "mc",
+    "text": "ネクスト！"
+  },
+  {
+    "id": "gekiatsu",
+    "file": "gekiatsu.mp3",
+    "role": "mc",
+    "text": "激アツ！！"
+  },
+  {
+    "id": "cutinBlue_rose",
+    "file": "cutinBlue_rose.mp3",
+    "role": "rose",
+    "text": "わたしも、がんばる！"
+  },
+  {
+    "id": "cutinRed_rose",
+    "file": "cutinRed_rose.mp3",
+    "role": "rose",
+    "text": "みんなを、守りたいの！"
+  },
+  {
+    "id": "cutinGold_rose",
+    "file": "cutinGold_rose.mp3",
+    "role": "rose",
+    "text": "これが、わたしの願い！！"
+  },
+  {
+    "id": "cutinBlue_violet",
+    "file": "cutinBlue_violet.mp3",
+    "role": "violet",
+    "text": "……まだ、終わらない。"
+  },
+  {
+    "id": "cutinRed_violet",
+    "file": "cutinRed_violet.mp3",
+    "role": "violet",
+    "text": "今度こそ、決着をつける。"
+  },
+  {
+    "id": "cutinGold_violet",
+    "file": "cutinGold_violet.mp3",
+    "role": "violet",
+    "text": "もう、迷わない！！"
+  },
+  {
+    "id": "cutinBlue_azure",
+    "file": "cutinBlue_azure.mp3",
+    "role": "heroine",
+    "text": "まだ、いける！"
+  },
+  {
+    "id": "cutinRed_azure",
+    "file": "cutinRed_azure.mp3",
+    "role": "heroine",
+    "text": "ここで、決める！"
+  },
+  {
+    "id": "cutinGold_azure",
+    "file": "cutinGold_azure.mp3",
+    "role": "heroine",
+    "text": "絶対に、負けない！！"
+  },
+  {
+    "id": "cutinBlue_amber",
+    "file": "cutinBlue_amber.mp3",
+    "role": "amber",
+    "text": "落ち着いて。まだ、これからよ。"
+  },
+  {
+    "id": "cutinRed_amber",
+    "file": "cutinRed_amber.mp3",
+    "role": "amber",
+    "text": "わたしに、任せなさい！"
+  },
+  {
+    "id": "cutinGold_amber",
+    "file": "cutinGold_amber.mp3",
+    "role": "amber",
+    "text": "これで、決めるわよ！！"
+  },
+  {
+    "id": "cutinBlue_scarlet",
+    "file": "cutinBlue_scarlet.mp3",
+    "role": "scarlet",
+    "text": "へっ、まだまだ！"
+  },
+  {
+    "id": "cutinRed_scarlet",
+    "file": "cutinRed_scarlet.mp3",
+    "role": "scarlet",
+    "text": "いくぜ！"
+  },
+  {
+    "id": "cutinGold_scarlet",
+    "file": "cutinGold_scarlet.mp3",
+    "role": "scarlet",
+    "text": "全部、ぶっ飛ばしてやる！！"
+  },
+  {
+    "id": "sp",
+    "file": "sp.mp3",
+    "role": "mc",
+    "text": "スーパーリーチ！"
+  },
+  {
+    "id": "spStorm",
+    "file": "spStorm.mp3",
+    "role": "mc",
+    "text": "黒嵐、降臨！！"
+  },
+  {
+    "id": "spAbyss",
+    "file": "spAbyss.mp3",
+    "role": "mc",
+    "text": "深淵の主！！"
+  },
+  {
+    "id": "spStory",
+    "file": "spStory.mp3",
+    "role": "mc",
+    "text": "ストーリーリーチ！！"
+  },
+  {
+    "id": "push",
+    "file": "push.mp3",
+    "role": "mc",
+    "text": "押せ！！"
+  },
+  {
+    "id": "lever",
+    "file": "lever.mp3",
+    "role": "mc",
+    "text": "レバーを、引け！！"
+  },
+  {
+    "id": "hit",
+    "file": "hit.mp3",
+    "role": "mc",
+    "text": "大当たり！！"
+  },
+  {
+    "id": "revival",
+    "file": "revival.mp3",
+    "role": "heroine",
+    "text": "まだ、終わってない！！"
+  },
+  {
+    "id": "miss",
+    "file": "miss.mp3",
+    "role": "soft",
+    "text": "そんな……"
+  },
+  {
+    "id": "sudden",
+    "file": "sudden.mp3",
+    "role": "heroine",
+    "text": "えっ……！？"
+  },
+  {
+    "id": "zenkaiten",
+    "file": "zenkaiten.mp3",
+    "role": "mc",
+    "text": "全回転！！"
+  },
+  {
+    "id": "lantern",
+    "file": "lantern.mp3",
+    "role": "mc",
+    "text": "ひもりボーナス！！"
+  },
+  {
+    "id": "challenge",
+    "file": "challenge.mp3",
+    "role": "mc",
+    "text": "チャレンジボーナス！"
+  },
+  {
+    "id": "rightShoot",
+    "file": "rightShoot.mp3",
+    "role": "guide",
+    "text": "右打ちしてください。"
+  },
+  {
+    "id": "round_rose",
+    "file": "round_rose.mp3",
+    "role": "rose",
+    "text": "どんどん、狙ってこう！"
+  },
+  {
+    "id": "round_violet",
+    "file": "round_violet.mp3",
+    "role": "violet",
+    "text": "そのまま、狙い続けて。"
+  },
+  {
+    "id": "round_azure",
+    "file": "round_azure.mp3",
+    "role": "heroine",
+    "text": "どんどん、狙って！"
+  },
+  {
+    "id": "round_amber",
+    "file": "round_amber.mp3",
+    "role": "amber",
+    "text": "その調子よ。しっかり狙ってね。"
+  },
+  {
+    "id": "round_scarlet",
+    "file": "round_scarlet.mp3",
+    "role": "scarlet",
+    "text": "ガンガン、いこうぜ！"
+  },
+  {
+    "id": "rush",
+    "file": "rush.mp3",
+    "role": "mc",
+    "text": "灯火ラッシュ、突入！！"
+  },
+  {
+    "id": "promote",
+    "file": "promote.mp3",
+    "role": "heroine",
+    "text": "チャレンジ成功！ 灯火ラッシュへ！"
+  },
+  {
+    "id": "challengeFail",
+    "file": "challengeFail.mp3",
+    "role": "soft",
+    "text": "チャレンジ失敗……。また、挑もう。"
+  },
+  {
+    "id": "lt",
+    "file": "lt.mp3",
+    "role": "mc",
+    "text": "オーロラ、超ラッシュ！！"
+  },
+  {
+    "id": "upper",
+    "file": "upper.mp3",
+    "role": "mc",
+    "text": "三千発、確定！！"
+  },
+  {
+    "id": "rushHit",
+    "file": "rushHit.mp3",
+    "role": "mc",
+    "text": "継続！！"
+  },
+  {
+    "id": "rushEnd",
+    "file": "rushEnd.mp3",
+    "role": "soft",
+    "text": "ラッシュ終了。おつかれさま。"
+  },
+  {
+    "id": "leftShoot",
+    "file": "leftShoot.mp3",
+    "role": "guide",
+    "text": "左打ちに戻してください。"
+  },
+  {
+    "id": "count3",
+    "file": "count3.mp3",
+    "role": "mc",
+    "text": "スリー！"
+  },
+  {
+    "id": "count2",
+    "file": "count2.mp3",
+    "role": "mc",
+    "text": "ツー！"
+  },
+  {
+    "id": "count1",
+    "file": "count1.mp3",
+    "role": "mc",
+    "text": "ワン！"
+  }
+]

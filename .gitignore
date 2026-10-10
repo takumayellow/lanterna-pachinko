@@ -1,0 +1,12 @@
+node_modules/
+dist/
+__pycache__/
+*.tsbuildinfo
+# 手元の素材（自分で用意した映像・音）の差し込み口。リポジトリには入れない
+local-assets/
+# 作曲・書き出しの中間物
+build-audio/
+# 液晶の絵の元（生成した PNG）。配るのは scripts/art/build.py で変換した public/art/
+art-src/
+# BGM 用の録音サンプル（scripts/music/samples.py が取ってくる. リポジトリには入れない）
+sample-libs/

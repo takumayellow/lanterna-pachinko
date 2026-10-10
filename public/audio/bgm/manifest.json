@@ -1,0 +1,148 @@
+{
+  "sampleRate": 48000,
+  "tracks": [
+    {
+      "id": "normal",
+      "file": "normal.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 60.25,
+      "loopStartSample": 12000,
+      "loopEndSample": 2892000,
+      "bpm": 128,
+      "lufs": -14.2
+    },
+    {
+      "id": "chance",
+      "file": "chance.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 57.392854167,
+      "loopStartSample": 12000,
+      "loopEndSample": 2754857,
+      "bpm": 168,
+      "lufs": -14.2
+    },
+    {
+      "id": "reach",
+      "file": "reach.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 51.45,
+      "loopStartSample": 12000,
+      "loopEndSample": 2469600,
+      "bpm": 150,
+      "lufs": -14.2
+    },
+    {
+      "id": "battle",
+      "file": "battle.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 60.25,
+      "loopStartSample": 12000,
+      "loopEndSample": 2892000,
+      "bpm": 160,
+      "lufs": -14.2
+    },
+    {
+      "id": "round",
+      "file": "round.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 56.720583333,
+      "loopStartSample": 12000,
+      "loopEndSample": 2722588,
+      "bpm": 170,
+      "lufs": -14.2
+    },
+    {
+      "id": "rush",
+      "file": "rush.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 64.25,
+      "loopStartSample": 12000,
+      "loopEndSample": 3084000,
+      "bpm": 165,
+      "lufs": -14.2
+    },
+    {
+      "id": "lt",
+      "file": "lt.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 61.645354167,
+      "loopStartSample": 12000,
+      "loopEndSample": 2958977,
+      "bpm": 172,
+      "lufs": -14.2
+    },
+    {
+      "id": "fanfare",
+      "file": "fanfare.mp3",
+      "loop": false,
+      "loopStart": null,
+      "loopEnd": null,
+      "loopStartSample": null,
+      "loopEndSample": null,
+      "bpm": 132,
+      "lufs": -12.2
+    },
+    {
+      "id": "rush_in",
+      "file": "rush_in.mp3",
+      "loop": false,
+      "loopStart": null,
+      "loopEnd": null,
+      "loopStartSample": null,
+      "loopEndSample": null,
+      "bpm": 165,
+      "lufs": -12.4
+    },
+    {
+      "id": "rush_end",
+      "file": "rush_end.mp3",
+      "loop": false,
+      "loopStart": null,
+      "loopEnd": null,
+      "loopStartSample": null,
+      "loopEndSample": null,
+      "bpm": 84,
+      "lufs": -12.1
+    },
+    {
+      "id": "spsp_story",
+      "file": "spsp_story.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 60.25,
+      "loopStartSample": 12000,
+      "loopEndSample": 2892000,
+      "bpm": 80,
+      "lufs": -14.3
+    },
+    {
+      "id": "spsp_storm",
+      "file": "spsp_storm.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 58.4318125,
+      "loopStartSample": 12000,
+      "loopEndSample": 2804727,
+      "bpm": 132,
+      "lufs": -14.2
+    },
+    {
+      "id": "spsp_abyss",
+      "file": "spsp_abyss.mp3",
+      "loop": true,
+      "loopStart": 0.25,
+      "loopEnd": 57.85,
+      "loopStartSample": 12000,
+      "loopEndSample": 2776800,
+      "bpm": 150,
+      "lufs": -14.2
+    }
+  ]
+}

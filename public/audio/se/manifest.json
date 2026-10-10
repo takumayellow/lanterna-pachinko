@@ -1,0 +1,188 @@
+[
+  {
+    "id": "launch",
+    "file": "launch.mp3",
+    "duration": 0.057,
+    "peakDb": -26.22
+  },
+  {
+    "id": "nail1",
+    "file": "nail1.mp3",
+    "duration": 0.041,
+    "peakDb": -24.04
+  },
+  {
+    "id": "nail2",
+    "file": "nail2.mp3",
+    "duration": 0.034,
+    "peakDb": -25.08
+  },
+  {
+    "id": "nail3",
+    "file": "nail3.mp3",
+    "duration": 0.037,
+    "peakDb": -24.69
+  },
+  {
+    "id": "nail4",
+    "file": "nail4.mp3",
+    "duration": 0.037,
+    "peakDb": -25.64
+  },
+  {
+    "id": "heso_in",
+    "file": "heso_in.mp3",
+    "duration": 0.52,
+    "peakDb": -9.22
+  },
+  {
+    "id": "payout",
+    "file": "payout.mp3",
+    "duration": 0.956,
+    "peakDb": -13.31
+  },
+  {
+    "id": "attacker_in",
+    "file": "attacker_in.mp3",
+    "duration": 0.349,
+    "peakDb": -10.14
+  },
+  {
+    "id": "hold_white",
+    "file": "hold_white.mp3",
+    "duration": 0.215,
+    "peakDb": -11.1
+  },
+  {
+    "id": "hold_blue",
+    "file": "hold_blue.mp3",
+    "duration": 0.474,
+    "peakDb": -8.15
+  },
+  {
+    "id": "hold_green",
+    "file": "hold_green.mp3",
+    "duration": 0.865,
+    "peakDb": -6.14
+  },
+  {
+    "id": "hold_red",
+    "file": "hold_red.mp3",
+    "duration": 1.137,
+    "peakDb": -3.67
+  },
+  {
+    "id": "hold_rainbow",
+    "file": "hold_rainbow.mp3",
+    "duration": 2.154,
+    "peakDb": -1.73
+  },
+  {
+    "id": "hold_change",
+    "file": "hold_change.mp3",
+    "duration": 1.503,
+    "peakDb": -4.23
+  },
+  {
+    "id": "reel_stop",
+    "file": "reel_stop.mp3",
+    "duration": 0.043,
+    "peakDb": -12.09
+  },
+  {
+    "id": "reel_stop_center",
+    "file": "reel_stop_center.mp3",
+    "duration": 0.47,
+    "peakDb": -6.1
+  },
+  {
+    "id": "reach",
+    "file": "reach.mp3",
+    "duration": 2.539,
+    "peakDb": -2.06
+  },
+  {
+    "id": "cutin_blue",
+    "file": "cutin_blue.mp3",
+    "duration": 1.131,
+    "peakDb": -4.12
+  },
+  {
+    "id": "cutin_red",
+    "file": "cutin_red.mp3",
+    "duration": 1.583,
+    "peakDb": -2.55
+  },
+  {
+    "id": "cutin_gold",
+    "file": "cutin_gold.mp3",
+    "duration": 2.7,
+    "peakDb": -1.01
+  },
+  {
+    "id": "button_appear",
+    "file": "button_appear.mp3",
+    "duration": 1.652,
+    "peakDb": -5.23
+  },
+  {
+    "id": "button_press",
+    "file": "button_press.mp3",
+    "duration": 0.556,
+    "peakDb": -1.11
+  },
+  {
+    "id": "gekiatsu",
+    "file": "gekiatsu.mp3",
+    "duration": 3.329,
+    "peakDb": -1.05
+  },
+  {
+    "id": "kyuin",
+    "file": "kyuin.mp3",
+    "duration": 2.234,
+    "peakDb": -1.18
+  },
+  {
+    "id": "freeze",
+    "file": "freeze.mp3",
+    "duration": 3.435,
+    "peakDb": -1.04
+  },
+  {
+    "id": "miss",
+    "file": "miss.mp3",
+    "duration": 0.254,
+    "peakDb": -20.1
+  },
+  {
+    "id": "gimmick",
+    "file": "gimmick.mp3",
+    "duration": 1.729,
+    "peakDb": -1.03
+  },
+  {
+    "id": "round_start",
+    "file": "round_start.mp3",
+    "duration": 1.728,
+    "peakDb": -4.21
+  },
+  {
+    "id": "denchu_open",
+    "file": "denchu_open.mp3",
+    "duration": 0.092,
+    "peakDb": -11.13
+  },
+  {
+    "id": "count_tick",
+    "file": "count_tick.mp3",
+    "duration": 0.012,
+    "peakDb": -24.25
+  },
+  {
+    "id": "flash",
+    "file": "flash.mp3",
+    "duration": 1.432,
+    "peakDb": -4.81
+  }
+]

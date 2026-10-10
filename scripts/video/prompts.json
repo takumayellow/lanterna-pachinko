@@ -1,0 +1,23 @@
+{
+  "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+  "size": [
+    960,
+    704
+  ],
+  "frames": 121,
+  "fps": 24,
+  "steps": 40,
+  "guidance": 5.0,
+  "negative": "camera shake, camera movement, zoom in, push in, dolly, scene cut, new objects appearing, objects disappearing, large objects in the foreground, people, characters, faces, text, letters, watermark, logo, subtitles, blurry, low quality, jpeg artifacts, distorted, deformed, flicker, static frozen image, overexposed",
+  "clips": {
+    "bg/city": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. A hillside harbor town at dusk: clouds drift slowly across the apricot and violet sky, the sea surface shimmers and ripples, the lanterns along the lanes flicker and sway gently in the breeze, the lighthouse beam glows softly, tiny sparks of light float upward and twinkle. Smooth, calm, cinematic anime film quality.",
+    "bg/night": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. A hillside harbor town at night: the lanterns twinkle and flicker, their reflections on the dark sea ripple and sway, thin clouds slide slowly past the large moon, stars twinkle, tiny glowing motes rise slowly like fireflies. Smooth, calm, cinematic anime film quality.",
+    "bg/circle": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. The gigantic glowing sigil in the sky turns very slowly in place, its rings and flame shapes pulse with light, the clouds around it churn and glow magenta and gold, light beams flicker, sparks of light rise steadily from the town's lanterns toward the sky, the sea shimmers. Tense, dramatic, cinematic anime film quality.",
+    "bg/barrier": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. Inside a dark ink-wash forest: the smoky black veils hanging from the sky sway slowly, mist drifts between the trees, the dim lantern flames flicker weakly, the still dark water ripples faintly, a few faint crimson glints drift. Eerie, quiet, dreamlike, smooth.",
+    "bg/clock": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. Inside an old clock tower shrine: the hanging violet and gold lanterns sway gently and their flames flicker, moonlight shines through the giant clock dial and its beams shimmer with drifting dust, the clock hands move slowly, light motes float. Mysterious, solemn, cinematic anime film quality.",
+    "bg/despair": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. A colossal black storm vortex churns and rotates over the sea, violet lightning flashes inside the clouds, torn lantern strings and debris swirl in the wind, heavy rain streaks down, the towering wave heaves, the crimson glow on the horizon pulses. Ominous, overwhelming, cinematic anime film quality.",
+    "bg/abyss": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. The ruins and the drowned lighthouse in the foreground stay perfectly still. Deep under the sea: shafts of light from the surface waver and shimmer, bubbles rise steadily, schools of glowing fish swim across, the coral glows and pulses softly, seaweed sways in the current. Melancholic, vast, cinematic anime film quality.",
+    "bg/gold": "Anime background animation, fixed camera, static wide shot, the composition stays exactly the same, no characters. A radiant golden burst of light pulses from the center of the sky, god rays slowly rotate, glowing sky lanterns rise slowly upward, sparkles and prism flares twinkle, gold and pink clouds drift. Euphoric, triumphant, cinematic anime film quality.",
+    "bg/rush": "Anime background animation, steady forward motion toward the bright vanishing point, no characters. Streaks of pink, violet, gold and cyan light rush past toward the camera, glowing lanterns fly by, the spiral ribbons of light swirl and rotate, sparks stream past. Exhilarating, fast, smooth, cinematic anime film quality."
+  }
+}

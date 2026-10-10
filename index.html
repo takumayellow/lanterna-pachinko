@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07040f" />
+    <meta name="description" content="ブラウザで遊べるオリジナルのパチンコ。物理で転がる玉、保留先読み、灯守の少女たちの演出、ST の RUSH まで。" />
+    <title>LANTERNA パチンコ</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='17' rx='9' ry='13' fill='%23ff6fb5' stroke='%23ffe08a' stroke-width='2'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="stage" aria-label="パチンコ台"></div>
+
+      <aside id="data" class="panel" aria-label="データカウンタ">
+        <div class="data-head">
+          <span id="d-mode" class="mode-chip">通常</span>
+          <span id="d-left" class="left"></span>
+        </div>
+        <div class="data-big">
+          <div><small>大当たり</small><b id="d-hits">0</b><small>回</small></div>
+          <div><small>現在</small><b id="d-spins">0</b><small>回転</small></div>
+        </div>
+        <dl class="data-grid">
+          <dt>総回転</dt><dd id="d-total">0</dd>
+          <dt>RUSH 最高</dt><dd id="d-maxchain">0 連</dd>
+          <dt>持ち玉</dt><dd id="d-balls">0</dd>
+          <dt>投資</dt><dd id="d-invested">0 円</dd>
+          <dt>収支</dt><dd id="d-balance">0 円</dd>
+        </dl>
+        <canvas id="slump" width="560" height="200" aria-label="スランプグラフ"></canvas>
+        <ol id="history" class="history" aria-label="大当たり履歴"></ol>
+        <button id="b-reset" class="ghost small" type="button">データを消す</button>
+      </aside>
+
+      <div id="controls" class="panel">
+        <button id="b-fire" class="fire" type="button" aria-pressed="false"><span class="ico">▶</span><span class="lbl">発射</span></button>
+        <label class="handle">
+          <span>強さ <b id="v-handle">55</b></span>
+          <input id="handle" type="range" min="30" max="100" value="55" />
+        </label>
+        <label class="toggle"><input id="auto-right" type="checkbox" checked /><span>右打ち自動</span></label>
+        <button id="b-rent" class="rent" type="button">玉貸<small>500円</small></button>
+        <button id="b-push" class="push" type="button">PUSH</button>
+      </div>
+
+      <div id="tools" class="tools">
+        <button id="b-sound" class="ghost" type="button" aria-pressed="true" aria-label="音" title="音 (M)">♪</button>
+        <button id="b-zoom" class="ghost" type="button" aria-pressed="true" aria-label="視点" title="視点 (Z)">⌕</button>
+        <button id="b-data" class="ghost" type="button" aria-label="データ" title="データ">▤</button>
+        <button id="b-help" class="ghost" type="button" aria-label="遊び方" title="遊び方 (H)">?</button>
+      </div>
+
+      <div id="toast" class="toast" role="status" hidden></div>
+
+      <div id="start" class="overlay">
+        <div class="card">
+          <p class="kicker">灯守少女のパチンコ</p>
+          <h1>LANTERNA</h1>
+          <p class="lead">玉は物理で転がり、ヘソに入った瞬間に当否が決まる。<br />保留の色、リーチ、カットイン、PUSH、そして ST の RUSH へ。</p>
+          <button id="b-start" class="start" type="button">遊ぶ</button>
+          <p class="hint">Space: PUSH ／ B: 玉貸 ／ Enter: 発射 ／ ←→: 強さ ／ Z: 視点 ／ M: 音</p>
+        </div>
+      </div>
+
+      <div id="help" class="overlay" hidden>
+        <div class="card help">
+          <h2>遊び方</h2>
+          <ol>
+            <li><b>左打ち</b>で盤面中央下の<b>ヘソ</b>を狙う。入ると特図1が回る（保留は 4 個まで）。強さはハンドルで調整（右打ち自動のときは左打ちの範囲まで）。</li>
+            <li>保留の色は熱さの目安（白 → 青 → 緑 → 赤 → 虹）。リーチ・カットイン・PUSH で当たりを待つ。</li>
+            <li>当たったら<b>右打ち</b>。右下のアタッカーに 10 個入れると 1 ラウンド。右打ち自動なら強さは自動で切り替わる。</li>
+            <li>7 揃いの<b>灯守BONUS</b>なら<b>灯火RUSH</b>（1/146.8 を 100 回、継続率 約 50%）へ。チャレンジBONUS でも成功すれば突入する。</li>
+            <li>RUSH 中の当たりは<b>オーロラ超RUSH</b>（1/82.4 を 130 回、継続率 約 80%）へ。超RUSH 中の 75% は 3000 発。</li>
+          </ol>
+          <p class="spec">通常 1/99.9（?spec=full で 1/319.9）／ 500 円 = 125 玉。データはこの端末にだけ保存します。</p>
+          <p class="credit">VOICEVOX:青山龍星 ／ VOICEVOX:中部つるぎ ／ VOICEVOX:冥鳴ひまり ／ VOICEVOX:No.7 ／ VOICEVOX:東北ずん子 ／ VOICEVOX 離途 ／ VOICEVOX:四国めたん ／ VOICEVOX:九州そら ／ オリジナル作品で、実在の機種・メーカーとは関係ありません。お金は賭けられません。</p>
+          <button id="b-help-close" class="start" type="button">閉じる</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
