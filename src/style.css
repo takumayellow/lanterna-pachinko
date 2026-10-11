@@ -521,3 +521,95 @@ body[data-shot="sp"] #data:hover,
 body[data-shot="jackpot"] #data:hover {
   opacity: 1;
 }
+
+/* ---- 開発者向けページ（?dev） */
+#dev {
+  right: max(16px, env(safe-area-inset-right));
+  top: calc(72px + env(safe-area-inset-top));
+  width: 290px;
+  max-height: calc(100% - 330px);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  font-size: 12px;
+  z-index: 20;
+}
+.dev-body {
+  overflow-y: auto;
+  min-height: 0;
+}
+.dev-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.dev-head button,
+.dev-actions button,
+.dev-row button {
+  font: inherit;
+  color: var(--text);
+  background: #2a2140;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.dev-actions button.dev-go {
+  background: linear-gradient(180deg, #5b3fd6, #3a2399);
+}
+#dev fieldset {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 8px 0 0;
+  padding: 4px 8px 8px;
+}
+#dev legend {
+  color: var(--gold);
+  padding: 0 4px;
+}
+.dev-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.dev-row span {
+  flex: 0 0 96px;
+  color: var(--muted);
+}
+.dev-row select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--text);
+  background: #1a1430;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+.dev-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.dev-status,
+.dev-note,
+.dev-now {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+.dev-now {
+  color: var(--cyan);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 900px) {
+  /* 右上のボタンの列は空けておく */
+  #dev {
+    left: 8px;
+    right: calc(66px + env(safe-area-inset-right));
+    width: auto;
+    top: max(8px, env(safe-area-inset-top));
+    max-height: 45%;
+  }
+}

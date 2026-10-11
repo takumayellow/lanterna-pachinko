@@ -22,6 +22,8 @@ import { applySave, clearSave, loadSave, pushSlump, writeSave } from "./ui/save"
 /** 発射の間隔 [s]。実機は 1 分 100 発 */
 const FIRE_INTERVAL = 0.6;
 const SLUMP_EVERY = 10;
+/** 開発者向けページ（URL に ?dev）。演出を選んで出せる。遊んだ記録は保存しない */
+const DEV_PAGE = new URLSearchParams(location.search).has("dev");
 
 /** 大当たりの種類を告げる台詞。ST 中の当たりはラウンド後に「継続」と言うので、ここでは黙る */
 const BONUS_VOICE: Record<Bonus, VoiceId | null> = {
@@ -73,8 +75,11 @@ async function boot(): Promise<void> {
   const layout = buildBoard();
   const world = new PhysicsWorld(layout);
   const m = new Machine(Math.random);
-  const saved = loadSave();
+  const saved = DEV_PAGE ? null : loadSave();
   let slump: number[] = saved?.slump ?? [];
+  const save = (): void => {
+    if (!DEV_PAGE) writeSave(m, slump);
+  };
   if (saved) applySave(m, saved);
 
   const lcdScale = Math.min(window.innerWidth, window.innerHeight) < 700 ? 0.62 : 1;
@@ -86,6 +91,7 @@ async function boot(): Promise<void> {
   const media = new MediaDirector(view.stage.video, import.meta.env.BASE_URL);
   void loadLocalScenes(import.meta.env.BASE_URL).then((s) => media.setScenes(s));
   if (import.meta.env.DEV) Object.assign(window, { __lab: { m, view, director, audio, media } });
+  if (DEV_PAGE) void import("./dev/panel").then(({ mountDevPanel }) => mountDevPanel({ m, director }));
   const later = new Timeline();
 
   let now = 0;
@@ -117,7 +123,7 @@ async function boot(): Promise<void> {
       return view.zoomed;
     },
     reset: () => {
-      clearSave();
+      if (!DEV_PAGE) clearSave();
       window.location.reload();
     },
   });
@@ -442,13 +448,13 @@ async function boot(): Promise<void> {
     saveT += dt;
     if (saveT >= 5) {
       saveT = 0;
-      writeSave(m, slump);
+      save();
     }
     requestAnimationFrame(frame);
   };
-  window.addEventListener("pagehide", () => writeSave(m, slump));
+  window.addEventListener("pagehide", save);
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) writeSave(m, slump);
+    if (document.hidden) save();
   });
   requestAnimationFrame(frame);
 }

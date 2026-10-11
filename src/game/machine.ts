@@ -1,6 +1,6 @@
-import { judge, makeHold, recolor, type DrawResult, type Hold, type HoldColor } from "./lottery";
+import { forcedResult, judge, makeHold, recolor, type Bonus, type DrawResult, type Hold, type HoldColor } from "./lottery";
 import { noticeCues, type NoticeCue } from "./notices";
-import { buildScenario, settleAt, type Scenario } from "./scenario";
+import { buildScenario, settleAt, type Scenario, type ScenarioForce } from "./scenario";
 import { hasSupport, isStMode, SPEC, spinsFor, type Mode } from "./spec";
 import type { Rand } from "./rng";
 
@@ -54,6 +54,16 @@ export interface Spin {
 }
 
 export type JackpotPhase = "opening" | "open" | "interval" | "ending";
+
+/** 開発者向けページで次の変動を決め打ちする指定 */
+export interface SpinForce {
+  /** 当否と大当たりの種類。null ならハズレ、省くと普段どおり抽選する */
+  bonus?: Bonus | null;
+  /** チャレンジBONUS の成否 */
+  promote?: boolean;
+  color: HoldColor;
+  scenario: ScenarioForce;
+}
 
 export interface Jackpot {
   result: DrawResult;
@@ -128,6 +138,8 @@ export class Machine {
   private openT = 0;
   private denchuOpen = false;
   private events: MachineEvent[] = [];
+  /** 決め打ちした保留（開発者向けページ） */
+  private readonly forced = new WeakMap<Hold, SpinForce>();
   private readonly rand: Rand;
 
   constructor(rand: Rand) {
@@ -199,6 +211,31 @@ export class Machine {
     return true;
   }
 
+  /**
+   * 開発者向け: 決め打ちした保留を、次に消化される位置へ積む。
+   * 電サポ中か特図2 の保留があれば特図2、それ以外は特図1 の先頭に入れる。満杯なら末尾を 1 つ捨てる
+   */
+  queueForced(f: SpinForce): void {
+    const kind: 1 | 2 = this.holds2.length > 0 || hasSupport(this.mode) ? 2 : 1;
+    const hold: Hold = { ...makeHold(kind, this.mode, this.rand), color: f.color };
+    this.forced.set(hold, f);
+    const list = [hold, ...(kind === 1 ? this.holds1 : this.holds2)].slice(0, SPEC.maxHold);
+    if (kind === 1) this.holds1 = list;
+    else this.holds2 = list;
+    this.events.push({ type: "hold", kind, color: hold.color });
+  }
+
+  /**
+   * 開発者向け: モードを切り替える。ST なら回数を満タンにする。
+   * 大当たり中は終わったときに移るモードが決まっているので切り替えない（false を返す）
+   */
+  enterMode(mode: Mode): boolean {
+    if (this.jackpot) return false;
+    if (mode !== this.mode) this.setMode(mode);
+    this.spinsLeft = spinsFor(mode);
+    return true;
+  }
+
   update(dt: number): MachineEvent[] {
     this.updateFuto(dt);
     if (this.jackpot) this.updateJackpot(dt);
@@ -242,9 +279,11 @@ export class Machine {
   }
 
   private startSpin(hold: Hold): void {
-    const result = judge(hold, this.mode, this.rand);
+    const f = this.forced.get(hold);
+    const result =
+      f?.bonus !== undefined ? forcedResult(f.bonus, f.promote ?? false, this.mode, this.rand) : judge(hold, this.mode, this.rand);
     const holdsLeft = hold.kind === 1 ? this.holds1.length : this.holds2.length;
-    const scenario = buildScenario(result, this.mode, holdsLeft, hold.color, this.rand);
+    const scenario = buildScenario(result, this.mode, holdsLeft, hold.color, this.rand, f?.scenario);
     this.spin = {
       hold,
       result,
@@ -332,8 +371,10 @@ export class Machine {
     this.mode = mode;
     // 通常時に入った保留が ST で消化されると当否が変わるので、先読みの色を合わせ直す
     if (mode !== from) {
-      this.holds1 = this.holds1.map((h) => recolor(h, mode, this.rand));
-      this.holds2 = this.holds2.map((h) => recolor(h, mode, this.rand));
+      // 決め打ちした保留は色も決め打ちのまま
+      const keepOrRecolor = (h: Hold) => (this.forced.has(h) ? h : recolor(h, mode, this.rand));
+      this.holds1 = this.holds1.map(keepOrRecolor);
+      this.holds2 = this.holds2.map(keepOrRecolor);
     }
     if (mode === "normal") {
       this.spinsLeft = 0;
