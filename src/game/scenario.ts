@@ -79,7 +79,21 @@ export interface Scenario {
 }
 
 /** リーチの行き先。信頼度は 通常リーチ 0.2% / 楽曲 5% / 日常 15% / 影法師 30% / 黒嵐 35% / 深淵 51% / ストーリー 70% */
-type Route = "hazure" | "reach" | SpKind | SpspKind;
+export type Route = "hazure" | "reach" | SpKind | SpspKind;
+
+/** 開発者向けページで演出を決め打ちするときの指定。指定の無いものは普段どおり抽選する */
+export interface ScenarioForce {
+  route?: Route | "zenkaiten" | "sudden";
+  pseudo?: 0 | 1 | 2 | 3;
+  cutin?: Cutin;
+  chara?: Chara;
+  title?: TitleColor;
+  /** SP リーチで PUSH を出すか（SPSP は必ず出る） */
+  push?: boolean;
+  button?: ButtonKind;
+  notices?: Partial<Notices>;
+  revival?: boolean;
+}
 const ROUTE: Tables<Route> = reliabilityTables<Route>(
   {
     hazure: { hit: 0 },
@@ -181,8 +195,8 @@ const PSEUDO_ON_MISS_REACH = { "0": 75, "1": 20, "2": 5, "3": 0 };
 const PSEUDO_ON_MISS_SP = { "0": 45, "1": 35, "2": 15, "3": 5 };
 const PSEUDO_GAP = 2.4;
 
-function pickPseudo(rand: Rand, hit: boolean, kind: ScenarioKind): number[] {
-  const n = Number(pickWeighted(rand, hit ? PSEUDO_ON_HIT : kind === "reach" ? PSEUDO_ON_MISS_REACH : PSEUDO_ON_MISS_SP));
+function pickPseudo(rand: Rand, hit: boolean, kind: ScenarioKind, count?: number): number[] {
+  const n = count ?? Number(pickWeighted(rand, hit ? PSEUDO_ON_HIT : kind === "reach" ? PSEUDO_ON_MISS_REACH : PSEUDO_ON_MISS_SP));
   return Array.from({ length: n }, (_, i) => 2.2 + i * PSEUDO_GAP);
 }
 
@@ -223,11 +237,16 @@ export function buildScenario(
   holdsLeft: number,
   color: HoldColor,
   rand: Rand,
+  force: ScenarioForce = {},
 ): Scenario {
   const fast = isStMode(mode) || mode === "jitan";
   let route: Route | null = null;
   let kind: ScenarioKind;
-  if (fast) kind = pickWeighted(rand, result.hit ? KIND_ON_HIT_FAST : KIND_ON_MISS_FAST);
+  if (force.route === "zenkaiten" || force.route === "sudden") kind = force.route;
+  else if (force.route) {
+    route = force.route;
+    kind = ROUTE_KIND[route];
+  } else if (fast) kind = pickWeighted(rand, result.hit ? KIND_ON_HIT_FAST : KIND_ON_MISS_FAST);
   else if (result.hit && result.bonus === "aurora") kind = "zenkaiten";
   else {
     route = pickRoute(rand, result.hit, color);
@@ -237,7 +256,7 @@ export function buildScenario(
   const spLike = kind === "sp" || kind === "spsp";
 
   const final = finalReels(result, kind, rand);
-  const pseudo = reachLike && !fast ? pickPseudo(rand, result.hit, kind) : [];
+  const pseudo = reachLike && !fast ? pickPseudo(rand, result.hit, kind, force.pseudo) : [];
   const pre = pseudo.length * PSEUDO_GAP;
 
   const base = {
@@ -249,11 +268,11 @@ export function buildScenario(
     fast,
     sp: isSpRoute(route) ? route : kind === "sp" ? ("shade" as const) : undefined,
     spsp: isSpspRoute(route) ? route : undefined,
-    chara: pickWeighted(rand, result.hit ? CHARA_ON_HIT : CHARA_ON_MISS),
-    title: spLike && !fast ? pick(rand, NOTICE.title, result.hit) : ("white" as TitleColor),
+    chara: force.chara ?? pickWeighted(rand, result.hit ? CHARA_ON_HIT : CHARA_ON_MISS),
+    title: spLike && !fast ? (force.title ?? pick(rand, NOTICE.title, result.hit)) : ("white" as TitleColor),
     button: "normal" as ButtonKind,
-    notices: reachLike && !fast ? pickNotices(rand, result.hit) : NO_NOTICES,
-    revival: spLike && result.hit && !fast && rand() < REVIVAL_RATE,
+    notices: reachLike && !fast ? { ...pickNotices(rand, result.hit), ...force.notices } : NO_NOTICES,
+    revival: spLike && result.hit && !fast && (force.revival ?? rand() < REVIVAL_RATE),
   };
 
   if (kind === "hazure") {
@@ -267,7 +286,8 @@ export function buildScenario(
     return { ...base, duration: 10, stops: [8.6, 8.6, 8.6] };
   }
 
-  const cutin = fast ? pickWeighted(rand, result.hit ? CUTIN_FAST_HIT : CUTIN_FAST_MISS) : pick(rand, NOTICE.cutin, result.hit);
+  const cutin =
+    force.cutin ?? (fast ? pickWeighted(rand, result.hit ? CUTIN_FAST_HIT : CUTIN_FAST_MISS) : pick(rand, NOTICE.cutin, result.hit));
   // リーチ前の予告が収まらない分だけリーチを遅らせる
   const notice = fast ? 0 : noticeLead(base.notices);
   const reachAt = (fast ? 1.0 : 3.2) + pre + notice;
@@ -279,7 +299,7 @@ export function buildScenario(
     return withCutin({ ...base, reachAt, duration: c + 0.8, stops: [reachAt - 1.2, c, reachAt] });
   }
   const spAt = reachAt + (fast ? 1.5 : 3.2);
-  const button = (): ButtonKind => (fast ? "normal" : pick(rand, NOTICE.button, result.hit));
+  const button = (): ButtonKind => force.button ?? (fast ? "normal" : pick(rand, NOTICE.button, result.hit));
   // 復活は c でいったんハズレ目に止め、REVIVAL_LEN 後に本当に止める
   const settle = (c: number, tail: number) =>
     base.revival
@@ -287,7 +307,7 @@ export function buildScenario(
       : { duration: c + tail, stops: [reachAt - 1.2, c, reachAt] as [number, number, number] };
   if (kind === "sp") {
     const c = spAt + (fast ? 8 : 12);
-    const push = rand() < SP_PUSH_RATE;
+    const push = force.push ?? rand() < SP_PUSH_RATE;
     return withCutin({
       ...base,
       reachAt,

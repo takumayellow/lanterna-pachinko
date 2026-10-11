@@ -98,7 +98,27 @@ export function recolor(hold: Hold, mode: Mode, rand: Rand): Hold {
 }
 
 export function judge(hold: Hold, mode: Mode, rand: Rand): DrawResult {
-  const o = outcome(hold, mode);
+  return withNumber(outcome(hold, mode), rand);
+}
+
+/** 大当たりの種類ごとのラウンド数と移るモード（チャレンジBONUS は成否で分かれる） */
+const BONUS_ROUTE: Record<Exclude<Bonus, "challenge">, { rounds: number; next: Mode }> = {
+  lantern: { rounds: SPEC.rounds.challenge, next: "rush" },
+  aurora: { rounds: SPEC.rounds.aurora, next: "lt" },
+  upper: { rounds: SPEC.rounds.upper, next: "lt" },
+  lower: { rounds: SPEC.rounds.lower, next: "lt" },
+};
+
+/** 開発者向けページ: 当否と大当たりの種類を決め打ちする。bonus が null ならハズレ */
+export function forcedResult(bonus: Bonus | null, promote: boolean, mode: Mode, rand: Rand): DrawResult {
+  if (!bonus) return withNumber(MISS(mode), rand);
+  if (bonus === "challenge") {
+    return withNumber({ hit: true, bonus, rounds: SPEC.rounds.challenge, next: promote ? "rush" : "normal", promote }, rand);
+  }
+  return withNumber({ hit: true, bonus, ...BONUS_ROUTE[bonus], promote: false }, rand);
+}
+
+function withNumber(o: Outcome, rand: Rand): DrawResult {
   if (!o.hit) return { ...o, number: 0 };
   const seven = o.bonus === "lantern" || o.bonus === "aurora" || o.bonus === "upper";
   return { ...o, number: seven ? 7 : plainNumber(rand) };
