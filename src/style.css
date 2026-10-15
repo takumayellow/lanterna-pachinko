@@ -421,6 +421,19 @@ input {
   color: var(--muted);
   font-size: 12px;
 }
+.hint.touch {
+  display: none;
+}
+/* 指で遊ぶ端末にはキーの割り当てでなく、ボタンの使い方を出す */
+@media (hover: none) and (pointer: coarse) {
+  .hint.keys {
+    display: none;
+  }
+  .hint.touch {
+    display: block;
+    font-size: 13px;
+  }
+}
 .help {
   text-align: left;
 }
@@ -501,6 +514,89 @@ input {
     width: auto;
     top: max(10px, env(safe-area-inset-top));
     max-height: calc(100% - 150px);
+  }
+  #data.open {
+    display: block;
+  }
+}
+
+/* 縦持ち: 右上のボタンが看板に重ならないよう、ボタンを上の帯に並べて台はその下から描く */
+@media (max-width: 900px) and (orientation: portrait) {
+  #stage {
+    top: calc(64px + env(safe-area-inset-top));
+  }
+  .tools {
+    flex-direction: row;
+  }
+  #data {
+    right: 8px;
+    top: calc(66px + env(safe-area-inset-top));
+    max-height: calc(100% - 200px);
+  }
+}
+
+/* 横持ちのスマホ: 縦が足りないので、操作を右の列・ボタンを左の列に寄せて台に高さを全部使う */
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  #stage {
+    top: 0;
+    bottom: 0;
+    left: calc(62px + env(safe-area-inset-left));
+    right: calc(196px + env(safe-area-inset-right));
+  }
+  #controls {
+    left: auto;
+    right: max(8px, env(safe-area-inset-right));
+    top: max(8px, env(safe-area-inset-top));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: 180px;
+    padding: 10px;
+    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto auto;
+  }
+  .fire {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 16px;
+  }
+  .handle {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .toggle {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+  .rent {
+    grid-column: 1;
+    grid-row: 4;
+    font-size: 15px;
+    padding: 6px;
+  }
+  .push {
+    grid-column: 2;
+    grid-row: 4;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+  .tools {
+    left: max(8px, env(safe-area-inset-left));
+    right: auto;
+    top: max(8px, env(safe-area-inset-top));
+    flex-direction: column;
+  }
+  #b-data {
+    display: block;
+  }
+  #data {
+    display: none;
+    left: calc(62px + env(safe-area-inset-left));
+    right: auto;
+    top: max(8px, env(safe-area-inset-top));
+    width: 290px;
+    max-height: calc(100% - 16px);
   }
   #data.open {
     display: block;
@@ -611,5 +707,12 @@ body[data-shot="jackpot"] #data:hover {
     width: auto;
     top: max(8px, env(safe-area-inset-top));
     max-height: 45%;
+  }
+}
+@media (max-width: 900px) and (orientation: portrait) {
+  /* 縦持ちではボタンが上の帯に並ぶので、その下から出す */
+  #dev {
+    right: 8px;
+    top: calc(66px + env(safe-area-inset-top));
   }
 }
